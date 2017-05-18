@@ -18,5 +18,5 @@ exports.velocity = function(a,t){
 }
 
 export.accelerate = function(v1,v2,t){
-  
+  return(a*t);
 }
