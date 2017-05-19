@@ -3,54 +3,16 @@ const energy = require('./energy');
 const readline = require('readline');
 
 
-
 const terminal = readline.createInterface({
     input:process.stdin,
     output:process.stdout
 });
-
-terminal.question("What type of equation are you looking for?",function(str){
-
-    //you will configure your series of questions inside here.
-if(str == motion){
-  terminal.question("which variable are you looking for?"),function(str){
-    if(str==a){
-      terminal.question("type your variables',function"(str){
-       energy.accelerate(){
-
-       }
-      }
-    }
-  }
-else if (str==energy){
-  terminal.question("which variable are you solving for?")
-}
- else ("Sorry, I can't calculate that yet...")
-
-
-});
-
-//Helper functions: These should be used repeatedly throughout your program.
-
-//Will close the terminal when you are done and have found your result.
-function end(){
-    terminal.close();
-}
-
-/*Acts a prompt to alert the user how and what to type in.
-  This is intended to help you with Question 3.
-*/
 function printOptions(){
     console.log("\nEnter the variables you know in a comma list.");
     console.log("If you do not know a variable, then type n");
     console.log("distance,velocity,acceleration,time,mass,energy");
 
 }
-/*Upon entering user input, it will store the information as a string
-  This chops up the string into smaller strings and puts them in an array,
-  Then converts each substring into its number form
-  note that if you try and convert n, the program will produce NaN = Not a Number
-  */
 function convertToArray(strcma){
     strcma = strcma.split(',');
     for(let i=0;i<strcma.length;i++){
@@ -59,14 +21,45 @@ function convertToArray(strcma){
     return strcma;
 }
 
+terminal.question("What type of equation are you looking for?",function(str){
+    //you will configure your series of questions inside here.
+    if(str == "motion"){
+        terminal.question("which variable are you solving for",function(str1){
+            printOptions()
+            terminal.question("type your variables",function(strcma){
+                strcma = convertToArray(strcma);
 
-/*String handeling
-  Every question receives a string as input.  Since you know that strings can be upper (65 -90) or lower (97 - 122), it helps your program if it is all in one case.
-  Use str.toLowerCase() to automatically change str to a lower case character.
-  Make this the immediate first step after each question.
-*/
-terminal.question("My question?", function(str){
-    //If I typed in "Motion"
-    str.toLowerCase();
-    //Now str == "motion";
+                if(str1=="a"){
+                    console.log(motion.accelerate(strcma[1],strcma[3]));
+                }
+
+                if(str1=="d"){
+                    console.log(motion.distance(strcma[2],strcma[1],strcma[3]))
+                }
+                if(str1=="t"){
+                    console.log(motion.time(strcma[0],strcma[1]))
+                }
+                if(str1=="v"){
+                    console.log(motion.velocity(strcma[0],strcma[3]))
+                }
+
+            });
+        })
+    }
+    else if(str == "energy"){
+        terminal.question("which variable are you solving for?"),function(str2){
+            if(str2=="ke"){
+                console.log(energy.kineticEnergy(strcma[4],strcmaa[1]))
+            }
+            if(str2=="m"){
+                console.log(energy.mass(strcma[5],strcma[1]))
+            }
+            if(str2=="v"){
+                console.log(energy.velocity(strcma[5],strcma[4]))
+            }
+        }
+    }
+    else{
+        console.log ("I'm sorry I don't know how to calculate that yet...")
+    }
 });
